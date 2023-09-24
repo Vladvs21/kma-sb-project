@@ -1,4 +1,4 @@
-package com.example.financial_manager.wrappers;
+package com.example.starter.wrappers;
 
 public class Income {
     private String incomeSource;

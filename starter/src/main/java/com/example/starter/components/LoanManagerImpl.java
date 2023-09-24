@@ -1,7 +1,7 @@
-package com.example.financial_manager.components;
+package com.example.starter.components;
 
-import com.example.financial_manager.managers.LoanManager;
-import com.example.financial_manager.wrappers.Loan;
+import com.example.starter.managers.LoanManager;
+import com.example.starter.wrappers.Loan;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

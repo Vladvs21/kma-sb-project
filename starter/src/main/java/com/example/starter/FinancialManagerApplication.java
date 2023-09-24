@@ -1,11 +1,11 @@
-package com.example.financial_manager;
+package com.example.starter;
 
-import com.example.financial_manager.components.ExpenseManagerImpl;
-import com.example.financial_manager.components.IncomeManagerImpl;
-import com.example.financial_manager.managers.ExpenseManager;
-import com.example.financial_manager.managers.IncomeManager;
-import com.example.financial_manager.wrappers.Expense;
-import com.example.financial_manager.wrappers.Income;
+import com.example.starter.components.ExpenseManagerImpl;
+import com.example.starter.components.IncomeManagerImpl;
+import com.example.starter.managers.ExpenseManager;
+import com.example.starter.managers.IncomeManager;
+import com.example.starter.wrappers.Expense;
+import com.example.starter.wrappers.Income;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;

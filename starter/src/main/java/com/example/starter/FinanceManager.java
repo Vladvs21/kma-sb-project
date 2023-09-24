@@ -1,7 +1,7 @@
-package com.example.financial_manager;
+package com.example.starter;
 
-import com.example.financial_manager.managers.ExpenseManager;
-import com.example.financial_manager.managers.IncomeManager;
+import com.example.starter.managers.ExpenseManager;
+import com.example.starter.managers.IncomeManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

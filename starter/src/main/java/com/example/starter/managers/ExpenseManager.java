@@ -1,6 +1,6 @@
-package com.example.financial_manager.managers;
+package com.example.starter.managers;
 
-import com.example.financial_manager.wrappers.Expense;
+import com.example.starter.wrappers.Expense;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
-package com.example.financial_manager;
+package com.example.starter;
 
-import com.example.financial_manager.components.ExpenseManagerImpl;
-import com.example.financial_manager.components.IncomeManagerImpl;
-import com.example.financial_manager.managers.ExpenseManager;
-import com.example.financial_manager.managers.IncomeManager;
+import com.example.starter.components.ExpenseManagerImpl;
+import com.example.starter.components.IncomeManagerImpl;
+import com.example.starter.managers.ExpenseManager;
+import com.example.starter.managers.IncomeManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
