@@ -6,14 +6,20 @@ import com.example.financial_manager.managers.ExpenseManager;
 import com.example.financial_manager.managers.IncomeManager;
 import com.example.financial_manager.wrappers.Expense;
 import com.example.financial_manager.wrappers.Income;
+import com.example.financial_manager_starter.services.UserInfoService;
+import com.example.financial_manager_starter.services.UserInfoServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @SpringBootApplication
-public class FinancialManagerApplication {
+public class FinancialManagerApplication implements CommandLineRunner {
 
+	@Autowired
+	UserInfoService userInfoService;
 	public static void main(String[] args) {
 		SpringApplication.run(FinancialManagerApplication.class, args);
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
@@ -35,4 +41,8 @@ public class FinancialManagerApplication {
 		System.out.println(financeManager.calculateBudget());
 	}
 
+	@Override
+	public void run(String... args) throws Exception {
+		userInfoService.printUserInfo();
+	}
 }

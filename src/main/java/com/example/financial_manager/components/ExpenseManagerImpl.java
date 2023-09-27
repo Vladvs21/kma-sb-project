@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+//@Component
 public class ExpenseManagerImpl implements ExpenseManager {
     private List<Expense> expenses = new ArrayList<>();
 
