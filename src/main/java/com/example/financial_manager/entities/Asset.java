@@ -17,8 +17,10 @@ public class Asset {
     private double assetPrice;
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Stock> stocks;
+
     @OneToMany
     private List<Loan> loan;
+
     @OneToMany
     private List<Investment> investments;
 
