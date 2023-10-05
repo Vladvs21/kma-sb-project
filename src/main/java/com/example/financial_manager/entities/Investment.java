@@ -1,6 +1,8 @@
 package com.example.financial_manager.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Set;
 
@@ -14,17 +16,21 @@ public class Investment {
     private String investmentName;
     @Column(nullable = false)
     private double investmentPrice;
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Stock> stocks;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "asset_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    private Asset asset;
+
+    public Asset getAsset() {
+        return asset;
+    }
+
+    public void setAsset(Asset asset) {
+        this.asset = asset;
+    }
+
     public Investment(){}
-
-    public Set<Stock> getStocks() {
-        return stocks;
-    }
-
-    public void setStocks(Set<Stock> stocks) {
-        this.stocks = stocks;
-    }
 
     public Investment(double investmentPrice, String investmentName) {
         this.investmentName = investmentName;

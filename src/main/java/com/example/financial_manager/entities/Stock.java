@@ -15,7 +15,7 @@ public class Stock {
     @Column(nullable = false)
     private double price;
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Investment> investments;
+    private Set<Asset> assets;
 
     public String getNameOfCompany() {
         return nameOfCompany;
@@ -33,12 +33,12 @@ public class Stock {
         this.price = price;
     }
 
-    public Set<Investment> getInvestments() {
-        return investments;
+    public Set<Asset> getInvestments() {
+        return assets;
     }
 
-    public void setInvestments(Set<Investment> investments) {
-        this.investments = investments;
+    public void setInvestments(Set<Asset> assets) {
+        this.assets = assets;
     }
 
     public void setStock_id(Long stockId) {

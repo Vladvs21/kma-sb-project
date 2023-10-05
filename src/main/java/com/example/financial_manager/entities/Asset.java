@@ -2,6 +2,9 @@ package com.example.financial_manager.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "assets")
 public class Asset {
@@ -12,12 +15,28 @@ public class Asset {
     private String assetName;
     @Column(nullable = false)
     private double assetPrice;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Stock> stocks;
+    @OneToMany
+    private List<Loan> loan;
+    @OneToMany
+    private List<Investment> investments;
 
     public Asset() {}
     public Asset(double assetPrice, String assetName) {
         this.assetName = assetName;
         this.assetPrice = assetPrice;
     }
+
+
+    public Set<Stock> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(Set<Stock> stocks) {
+        this.stocks = stocks;
+    }
+
 
     public void setAssetName(String assetName) {
         this.assetName = assetName;
