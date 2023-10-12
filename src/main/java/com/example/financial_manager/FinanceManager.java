@@ -16,7 +16,6 @@ public class FinanceManager {
     private final ExpenseManager expenseManager;
     private final IncomeManager incomeManager;
     private static final Logger logger = LoggerFactory.getLogger(FinanceManager.class);
-    private static final Marker SECURITY_MARKER = MarkerFactory.getMarker("SECURITY");
 
     @Value("${currency.default}")
     private String currency;
