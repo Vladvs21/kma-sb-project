@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 @SpringBootApplication
 public class FinancialManagerApplication {
@@ -36,6 +37,8 @@ public class FinancialManagerApplication {
 		expenseManager.updateExpenseAmount(1L,500);
 		//System.out.println(expenseManager.getAllExpenses().get(0).getExpanseAmount());
 		System.out.println("Balance 3: "+financeManager.calculateBudget());
+//		Scanner scanner = new Scanner(System.in);
+//		double d = scanner.nextDouble();
 
 		//System.out.println("Income manager currency: "+incomeManager.getCurrency());
 	}
