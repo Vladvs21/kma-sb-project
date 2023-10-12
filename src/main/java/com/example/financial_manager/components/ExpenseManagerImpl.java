@@ -21,7 +21,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
     private ExpenseRepository expenseRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(FinanceManager.class);
-    private static final Marker SECURITY_MARKER = MarkerFactory.getMarker("SECURITY");
+    private static final Marker DB_CONNECT_MARKER = MarkerFactory.getMarker("DB_CONNECT");
     @Override
     public void addExpense(double amount, String purpose) {
         expenseRepository.save(new Expense(null,amount,purpose));
@@ -40,7 +40,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
                 Expense updatedExpense = expense.get();
                 updatedExpense.setExpanseAmount(amount);
                 expenseRepository.save(updatedExpense);
-                logger.info(SECURITY_MARKER, "Security check passed");
+                logger.info(DB_CONNECT_MARKER,"Successful");
                 logger.info("Expanse amount: Successfully updated");
             }else{
                 logger.warn("Expanse amount: Not updated. Wrong id");

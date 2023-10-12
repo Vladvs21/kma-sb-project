@@ -1,12 +1,5 @@
 <configuration>
 
-<!--    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
-<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
-<!--            <Pattern>-->
-<!--                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n-->
-<!--            </Pattern>-->
-<!--        </layout>-->
-<!--    </appender>-->
     <timestamp key="byDay" datePattern="yyyyMMdd'T'HHmmss"/>
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
@@ -17,11 +10,6 @@
         </encoder>
     </appender>
     <appender name="console" class="com.example.financial_manager.ConsoleAppender"/>
-
-    <logger name="com.example.financial_manager" level="debug" additivity="false">
-        <appender-ref ref="FILE" />
-        <appender-ref ref="CONSOLE"/>
-    </logger>
 
     <root level="info">
         <appender-ref ref="FILE" />

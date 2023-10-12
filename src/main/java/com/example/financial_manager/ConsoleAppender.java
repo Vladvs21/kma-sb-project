@@ -12,9 +12,15 @@ public class ConsoleAppender extends AppenderBase<ILoggingEvent>{
 
     @Override
     protected void append(ILoggingEvent event) {
-
-        System.out.println(LocalDate.now() + " : " + LocalTime.now() + " -- " + event.toString());
-
+        try {
+            if (event.getMarkerList().isEmpty()) {
+                System.out.println(LocalDate.now() + " : " + LocalTime.now() + " -- " + event.toString());
+            } else {
+                System.out.println(LocalDate.now() + " : " + LocalTime.now() + " -- " + "(" + event.getMarker().toString() + ")" + event.toString());
+            }
+        }catch (Exception e){
+            System.out.println(LocalDate.now() + " : " + LocalTime.now() + " -- " + event.toString());
+        }
     }
 
 }
