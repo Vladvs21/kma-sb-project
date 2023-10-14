@@ -1,0 +1,37 @@
+1697141455281 INFO [main] com.example.financial_manager.FinancialManagerApplication - Starting FinancialManagerApplication using Java 21 with PID 1236 (D:\University\2023-2024\spring boot\project\target\classes started by volod in D:\University\2023-2024\spring boot\project)
+1697141455283 INFO [main] com.example.financial_manager.FinancialManagerApplication - The following 1 profile is active: "dev"
+1697141456089 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+1697141456166 INFO [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 68 ms. Found 5 JPA repository interfaces.
+1697141456701 INFO [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+1697141456709 INFO [main] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+1697141456711 INFO [main] org.apache.catalina.core.StandardService - Starting service [Tomcat]
+1697141456711 INFO [main] org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.12]
+1697141456805 INFO [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+1697141456805 INFO [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1459 ms
+1697141456840 INFO [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+1697141457061 INFO [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:financeDB user=SA
+1697141457063 INFO [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+1697141457075 INFO [main] org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:financeDB'
+1697141457218 INFO [main] org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+1697141457281 INFO [main] org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.7.Final
+1697141457284 INFO [main] org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+1697141457446 INFO [main] org.hibernate.bytecode.internal.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+1697141457588 INFO [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+1697141457926 INFO [main] org.hibernate.bytecode.internal.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+1697141458746 INFO [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+1697141458817 INFO [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+1697141459309 WARN [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+1697141459652 INFO [main] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+1697141459679 INFO [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+1697141459691 INFO [main] com.example.financial_manager.FinancialManagerApplication - Started FinancialManagerApplication in 4.955 seconds (process running for 6.114)
+1697141459853 INFO [main] com.example.financial_manager.FinanceManager - Calculating budget for currency: EUR
+1697141459854 INFO [main] com.example.financial_manager.FinanceManager - EUR
+1697141459860 INFO [main] com.example.financial_manager.FinanceManager - Calculating budget for currency: EUR
+1697141459861 INFO [main] com.example.financial_manager.FinanceManager - EUR
+1697141459884 INFO [main] com.example.financial_manager.FinanceManager - Security check passed
+1697141459884 INFO [main] com.example.financial_manager.FinanceManager - Expanse amount: Successfully updated
+1697141459888 INFO [main] com.example.financial_manager.FinanceManager - Calculating budget for currency: EUR
+1697141459888 INFO [main] com.example.financial_manager.FinanceManager - EUR
+1697141470103 INFO [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+1697141470312 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+1697141470329 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
