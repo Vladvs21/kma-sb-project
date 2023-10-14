@@ -4,6 +4,10 @@ import com.example.financial_manager.entities.Expense;
 import com.example.financial_manager.managers.IncomeManager;
 import com.example.financial_manager.entities.Income;
 import com.example.financial_manager.repositories.IncomeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +19,8 @@ public class IncomeManagerImpl implements IncomeManager {
 
     private final IncomeRepository incomeRepository;
     private String currency;
+    private static final Logger logger = LoggerFactory.getLogger(IncomeManagerImpl.class);
+    private static final Marker DB_CONNECT_MARKER = MarkerFactory.getMarker("DB_CONNECT");
 
     //@Autowired
     public IncomeManagerImpl(IncomeRepository incomeRepository, String currency) {
@@ -25,6 +31,7 @@ public class IncomeManagerImpl implements IncomeManager {
     @Override
     public void addIncome(double amount, String source) {
         incomeRepository.save(new Income(amount,source));
+        logger.info(DB_CONNECT_MARKER,"Income added successful");
     }
 
     @Override
