@@ -31,7 +31,6 @@ public class FinanceManager {
         double totalExpenses = expenseManager.calculateTotalExpenses();
         double totalIncome = incomeManager.calculateTotalIncome();
         logger.info("Calculating budget for currency: {}", currency);
-        logger.info(currency);
         MDC.remove("currency");
         //System.out.println("FinanceManager currency: " + currency);
         return totalIncome - totalExpenses;
