@@ -37,8 +37,6 @@ public class FinancialManagerApplication {
 		expenseManager.updateExpenseAmount(1L,500);
 		//System.out.println(expenseManager.getAllExpenses().get(0).getExpanseAmount());
 		System.out.println("Balance 3: "+financeManager.calculateBudget());
-//		Scanner scanner = new Scanner(System.in);
-//		double d = scanner.nextDouble();
 
 		//System.out.println("Income manager currency: "+incomeManager.getCurrency());
 	}

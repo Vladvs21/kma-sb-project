@@ -19,6 +19,31 @@ public class ExpenseManagerImpl implements ExpenseManager {
 
     @Autowired
     private ExpenseRepository expenseRepository;
+    @Override
+    public void addExpense(double amount, String purpose) {
+        expenseRepository.save(new Expense(null,amount,purpose));
+    }
+
+    @Override
+    public void deleteExpense(Long id) {
+        expenseRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateExpenseAmount(Long id, double amount) {
+        try {
+            Optional<Expense> expense = expenseRepository.findById(id);
+            if(expense.isPresent()){
+                Expense updatedExpense = expense.get();
+                updatedExpense.setExpanseAmount(amount);
+                expenseRepository.save(updatedExpense);
+            }else{
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(FinanceManager.class);
     private static final Marker DB_CONNECT_MARKER = MarkerFactory.getMarker("DB_CONNECT");
