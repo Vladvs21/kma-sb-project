@@ -1,14 +1,15 @@
 package com.example.financial_manager.managers;
 
-import com.example.financial_manager.entities.Income;
+import com.example.financial_manager.dto.IncomeDto;
+import com.example.financial_manager.entities.IncomeEntity;
 
 import java.util.List;
 
 public interface IncomeManager {
-    void addIncome(double amount, String source);
+    IncomeDto addIncome(IncomeDto incomeDto);
     void deleteIncome(Long id);
-    void updateIncomeAmount(Long id, double amount);
-    void updateIncomeSource(Long id, String source);
-    List<Income> getAllIncomes();
+    IncomeDto updateIncome(Long id, IncomeDto incomeDto);
+    List<IncomeDto> getAllIncomes();
+    IncomeDto getIncome(Long id);
     double calculateTotalIncome();
 }

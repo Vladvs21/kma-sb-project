@@ -1,0 +1,26 @@
+### POST Request to Create an Expance
+POST http://localhost:8080/expenses/createExpanse
+Content-Type: application/json
+
+{
+  "purpose": "Products",
+  "amount": 200.0
+}
+
+### GET Request to Get all Expanses
+GET http://localhost:8080/expenses
+
+### GET Request to Get Expanse with id = 2
+GET http://localhost:8080/expenses/2
+
+### PUT Request to Update Expanse with id = 3
+PUT http://localhost:8080/expenses/3
+Content-Type: application/json
+
+{
+  "purpose": "Games",
+  "amount": 100.01
+}
+
+### DELETE Request to Delete Expanse with id = 3
+DELETE http://localhost:8080/expenses/3

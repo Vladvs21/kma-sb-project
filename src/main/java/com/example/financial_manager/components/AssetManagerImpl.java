@@ -1,13 +1,11 @@
 package com.example.financial_manager.components;
 
-import com.example.financial_manager.entities.Loan;
 import com.example.financial_manager.managers.AssetManager;
-import com.example.financial_manager.entities.Asset;
+import com.example.financial_manager.entities.AssetEntity;
 import com.example.financial_manager.repositories.AssetsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +16,7 @@ public class AssetManagerImpl implements AssetManager {
     private AssetsRepository assets;
     @Override
     public void addAsset(double price, String name) {
-        assets.save(new Asset(price,name));
+       // assets.save(new AssetEntity(price,name));
     }
 
     @Override
@@ -29,9 +27,9 @@ public class AssetManagerImpl implements AssetManager {
     @Override
     public void updateAssetPrice(Long id, double price) {
         try {
-            Optional<Asset> asset = assets.findById(id);
+            Optional<AssetEntity> asset = assets.findById(id);
             if(asset.isPresent()){
-                Asset updatedExpense = asset.get();
+                AssetEntity updatedExpense = asset.get();
                 updatedExpense.setAssetPrice(price);
                 assets.save(updatedExpense);
             }else{
@@ -45,9 +43,9 @@ public class AssetManagerImpl implements AssetManager {
     @Override
     public void updateAssetName(Long id, String name) {
         try {
-            Optional<Asset> asset = assets.findById(id);
+            Optional<AssetEntity> asset = assets.findById(id);
             if(asset.isPresent()){
-                Asset updatedExpense = asset.get();
+                AssetEntity updatedExpense = asset.get();
                 updatedExpense.setAssetName(name);
                 assets.save(updatedExpense);
             }else{
@@ -59,12 +57,12 @@ public class AssetManagerImpl implements AssetManager {
     }
 
     @Override
-    public List<Asset> getAllAssets() {
+    public List<AssetEntity> getAllAssets() {
         return assets.findAll();
     }
 
     @Override
     public double calculateTotalAssets() {
-        return assets.findAll().stream().mapToDouble(Asset::getAssetPrice).sum();
+        return assets.findAll().stream().mapToDouble(AssetEntity::getAssetPrice).sum();
     }
 }

@@ -1,82 +1,83 @@
 package com.example.financial_manager.components;
 
+import com.example.financial_manager.controllers.exceptionHandler.exceptions.NoSuchIncomeException;
+import com.example.financial_manager.dto.IncomeDto;
+import com.example.financial_manager.entities.ExpenseEntity;
 import com.example.financial_manager.managers.IncomeManager;
-import com.example.financial_manager.entities.Income;
+import com.example.financial_manager.entities.IncomeEntity;
+import com.example.financial_manager.mappers.IncomeMapper;
 import com.example.financial_manager.repositories.IncomeRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 //@Component
+@RequiredArgsConstructor
 public class IncomeManagerImpl implements IncomeManager {
 
+    private final IncomeMapper incomeMapper;
     private final IncomeRepository incomeRepository;
-    private String currency;
+    private final String currency;
+
+
     private static final Logger logger = LoggerFactory.getLogger(IncomeManagerImpl.class);
     private static final Marker DB_CONNECT_MARKER = MarkerFactory.getMarker("DB_CONNECT");
-    //@Autowired
-    public IncomeManagerImpl(IncomeRepository incomeRepository, String currency) {
-        this.incomeRepository = incomeRepository;
-        this.currency = currency;
-    }
 
     @Override
-    public void addIncome(double amount, String source) {
-
-        incomeRepository.save(new Income(amount,source));
+    public IncomeDto addIncome(IncomeDto incomeDto) {
+        IncomeEntity income = incomeMapper.incomeDtoToIncomeEntity(incomeDto);
+        incomeRepository.save(income);
         logger.info(DB_CONNECT_MARKER,"Income added successful");
+        return incomeMapper.incomeEntityToIncomeDto(income);
     }
 
     @Override
     public void deleteIncome(Long id) {
-        incomeRepository.deleteById(id);
+        if(incomeRepository.findById(id).isPresent()){
+            incomeRepository.deleteById(id);
+        }else{
+            throw new NoSuchIncomeException(id);
+        }
+
     }
 
     @Override
-    public void updateIncomeAmount(Long id, double amount) {
-        try {
-            Optional<Income> income = incomeRepository.findById(id);
-            if(income.isPresent()){
-                Income updatedExpense = income.get();
-                updatedExpense.setIncomeAmount(amount);
-                incomeRepository.save(updatedExpense);
-            }else{
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    public IncomeDto updateIncome(Long id, IncomeDto incomeDto) {
+        if(incomeRepository.findById(id).isPresent()){
+            IncomeEntity incomeEntity = incomeMapper.incomeDtoToIncomeEntity(incomeDto);
+            incomeEntity.setId(id);
+            incomeRepository.save(incomeEntity);
+            return incomeMapper.incomeEntityToIncomeDto(incomeEntity);
+        }else{
+            throw new NoSuchIncomeException(id);
         }
     }
 
+
     @Override
-    public void updateIncomeSource(Long id, String source) {
-        try {
-            Optional<Income> income = incomeRepository.findById(id);
-            if(income.isPresent()){
-                Income updatedExpense = income.get();
-                updatedExpense.setIncomeSource(source);
-                incomeRepository.save(updatedExpense);
-            }else{
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public List<IncomeDto> getAllIncomes() {
+        return incomeRepository.findAll().stream().map(incomeMapper::incomeEntityToIncomeDto).toList();
     }
 
     @Override
-    public List<Income> getAllIncomes() {
-        return incomeRepository.findAll();
+    public IncomeDto getIncome(Long id) {
+        if(incomeRepository.findById(id).isPresent()){
+            return incomeMapper.incomeEntityToIncomeDto(incomeRepository.findById(id).get());
+        }else{
+            throw new NoSuchIncomeException(id);
+        }
     }
 
     @Override
     public double calculateTotalIncome() {
         //System.out.println(currency);
-        return incomeRepository.findAll().stream().mapToDouble(Income::getIncomeAmount).sum();
+        return incomeRepository.findAll().stream().mapToDouble(IncomeEntity::getIncomeAmount).sum();
     }
 
 }

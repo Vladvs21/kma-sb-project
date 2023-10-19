@@ -1,14 +1,14 @@
 package com.example.financial_manager.repositories;
 
-import com.example.financial_manager.entities.Asset;
+import com.example.financial_manager.entities.AssetEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface AssetsRepository extends JpaRepository<Asset,Long> {
+public interface AssetsRepository extends JpaRepository<AssetEntity,Long> {
 
-    List<Asset> findByAssetPrice(double price);
-    List<Asset> findByAssetName(String name);
+    List<AssetEntity> findByAssetPrice(double price);
+    List<AssetEntity> findByAssetName(String name);
 }

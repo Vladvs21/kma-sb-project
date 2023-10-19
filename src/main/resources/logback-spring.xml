@@ -1,4 +1,4 @@
-<configuration>
+<configuration debug="true">
 
     <timestamp key="byDay" datePattern="yyyyMMdd'T'HHmmss"/>
 
@@ -6,13 +6,13 @@
         <file> log-${byDay}.txt </file>
         <append>true</append>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="com.example.financial_manager.CustomLayout" />
+            <layout class="com.example.financial_manager.log.CustomLayout" />
         </encoder>
     </appender>
-    <appender name="console" class="com.example.financial_manager.ConsoleAppender"/>
+    <appender name="console" class="com.example.financial_manager.log.ConsoleAppender"/>
 
     <root level="info">
-        <appender-ref ref="FILE" />
+<!--        <appender-ref ref="FILE" />-->
         <appender-ref ref="console"/>
     </root>
 

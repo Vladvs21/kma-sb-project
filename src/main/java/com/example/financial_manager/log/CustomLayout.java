@@ -1,4 +1,4 @@
-package com.example.financial_manager;
+package com.example.financial_manager.log;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.LayoutBase;
 
