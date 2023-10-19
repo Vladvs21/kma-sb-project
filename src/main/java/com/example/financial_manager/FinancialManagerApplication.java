@@ -2,6 +2,7 @@ package com.example.financial_manager;
 
 import com.example.financial_manager.components.ExpenseManagerImpl;
 import com.example.financial_manager.components.IncomeManagerImpl;
+import com.example.financial_manager.dto.IncomeDto;
 import com.example.financial_manager.managers.ExpenseManager;
 import com.example.financial_manager.managers.IncomeManager;
 //import com.example.financial_manager_starter.services.UserInfoService;
@@ -16,10 +17,27 @@ public class FinancialManagerApplication {
 	public static void main(String[] args) {
 		var context = SpringApplication.run(FinancialManagerApplication.class, args);
 		ExpenseManagerImpl expenseManager = context.getBean(ExpenseManagerImpl.class);
+
 		ExpenseDto expenseDto = new ExpenseDto();
 		expenseDto.setAmount(200);
 		expenseDto.setPurpose("Products");
 		expenseManager.addExpense(expenseDto);
+
+		ExpenseDto expenseDto2 = new ExpenseDto();
+		expenseDto2.setAmount(300);
+		expenseDto2.setPurpose("Games");
+		expenseManager.addExpense(expenseDto2);
+
+		IncomeManager incomeManager = context.getBean(IncomeManagerImpl.class);
+
+		IncomeDto incomeDto = new IncomeDto();
+		incomeDto.setAmount(1000);
+		incomeDto.setSource("Salary");
+		incomeManager.addIncome(incomeDto);
+
+		FinanceManager financeManager = context.getBean(FinanceManager.class);
+		System.out.println("Budget: " + financeManager.calculateBudget());
+
 
 //		IncomeManager incomeManager = springContext.getBean(IncomeManagerImpl.class);
 //		ExpenseManager expenseManager = springContext.getBean(ExpenseManagerImpl.class);
