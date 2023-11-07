@@ -1,6 +1,6 @@
 package com.example.financial_manager.managers;
 
-import com.example.financial_manager.entities.Investment;
+import com.example.financial_manager.entities.InvestmentEntity;
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ public interface InvestmentManager {
     void deleteInvestment(Long id);
     void updateInvestmentPrice(Long id, double price);
     void updateInvestmentName(Long id, String name);
-    List<Investment> getAllInvestments();
+    List<InvestmentEntity> getAllInvestments();
     double calculateTotalInvestments();
 }

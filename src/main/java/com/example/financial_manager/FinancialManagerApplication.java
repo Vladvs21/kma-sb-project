@@ -2,43 +2,62 @@ package com.example.financial_manager;
 
 import com.example.financial_manager.components.ExpenseManagerImpl;
 import com.example.financial_manager.components.IncomeManagerImpl;
+import com.example.financial_manager.dto.IncomeDto;
 import com.example.financial_manager.managers.ExpenseManager;
 import com.example.financial_manager.managers.IncomeManager;
-import com.example.financial_manager.entities.Expense;
-import com.example.financial_manager.entities.Income;
 //import com.example.financial_manager_starter.services.UserInfoService;
 //import com.example.financial_manager_starter.services.UserInfoServiceImpl;
-import com.example.financial_manager_starter.services.UserInfoService;
-import org.hibernate.cfg.Environment;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.financial_manager.models.Expanse;
+import com.example.financial_manager.dto.ExpenseDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
-import java.util.Arrays;
-import java.util.Scanner;
 
 @SpringBootApplication
 public class FinancialManagerApplication {
 	public static void main(String[] args) {
-		var springContext = SpringApplication.run(FinancialManagerApplication.class, args);
+		var context = SpringApplication.run(FinancialManagerApplication.class, args);
+		ExpenseManagerImpl expenseManager = context.getBean(ExpenseManagerImpl.class);
 
-		IncomeManager incomeManager = springContext.getBean(IncomeManagerImpl.class);
-		ExpenseManager expenseManager = springContext.getBean(ExpenseManagerImpl.class);
+		ExpenseDto expenseDto = new ExpenseDto();
+		expenseDto.setAmount(200);
+		expenseDto.setPurpose("Products");
+		expenseManager.addExpense(expenseDto);
 
-		FinanceManager financeManager = springContext.getBean(FinanceManager.class);
-		incomeManager.addIncome(1000,"Salary");
-		expenseManager.addExpense(300,"Products");
-		System.out.println("Balance 1: "+financeManager.calculateBudget());
+		ExpenseDto expenseDto2 = new ExpenseDto();
+		expenseDto2.setAmount(300);
+		expenseDto2.setPurpose("Games");
+		expenseManager.addExpense(expenseDto2);
 
-		expenseManager.addExpense(200,"Games");
-		System.out.println("Balance 2: "+financeManager.calculateBudget());
+		IncomeManager incomeManager = context.getBean(IncomeManagerImpl.class);
 
-		expenseManager.updateExpenseAmount(1L,500);
-		//System.out.println(expenseManager.getAllExpenses().get(0).getExpanseAmount());
-		System.out.println("Balance 3: "+financeManager.calculateBudget());
+		IncomeDto incomeDto = new IncomeDto();
+		incomeDto.setAmount(1000);
+		incomeDto.setSource("Salary");
+		incomeManager.addIncome(incomeDto);
 
-		//System.out.println("Income manager currency: "+incomeManager.getCurrency());
+		FinanceManager financeManager = context.getBean(FinanceManager.class);
+		System.out.println("Budget: " + financeManager.calculateBudget());
+
+
+//		IncomeManager incomeManager = springContext.getBean(IncomeManagerImpl.class);
+//		ExpenseManager expenseManager = springContext.getBean(ExpenseManagerImpl.class);
+//
+//		FinanceManager financeManager = springContext.getBean(FinanceManager.class);
+//		incomeManager.addIncome(1000,"Salary");
+//		expenseManager.addExpense(300,"Products");
+//		System.out.println("Balance 1: "+financeManager.calculateBudget());
+//
+//		expenseManager.addExpense(200,"Games");
+//		System.out.println("Balance 2: "+financeManager.calculateBudget());
+//
+//		expenseManager.updateExpenseAmount(1L,500);
+//		//System.out.println(expenseManager.getAllExpenses().get(0).getExpanseAmount());
+//		System.out.println("Balance 3: "+financeManager.calculateBudget());
+////		Scanner scanner = new Scanner(System.in);
+////		double d = scanner.nextDouble();
+//
+//		//System.out.println("Income manager currency: "+incomeManager.getCurrency());
+
 	}
 
 }

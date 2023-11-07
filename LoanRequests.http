@@ -1,0 +1,26 @@
+### POST Request to Create an Loan
+POST http://localhost:8080/loans/createLoan
+Content-Type: application/json
+
+{
+  "loanSource": "Credit",
+  "loanAmount": 2000.0
+}
+
+### GET Request to Get all Loans
+GET http://localhost:8080/loans
+
+### GET Request to Get Loan with id = 2
+GET http://localhost:8080/loans/2
+
+### PUT Request to Update Loan with id = 3
+PUT http://localhost:8080/loans/3
+Content-Type: application/json
+
+{
+  "loanSource": "Overdraft",
+  "loanAmount": 300.07
+}
+
+### DELETE Request to Delete Loan with id = 2
+DELETE http://localhost:8080/loans/2

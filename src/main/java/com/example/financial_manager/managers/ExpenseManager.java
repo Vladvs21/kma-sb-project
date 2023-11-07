@@ -1,14 +1,15 @@
 package com.example.financial_manager.managers;
 
-import com.example.financial_manager.entities.Expense;
+import com.example.financial_manager.dto.ExpenseDto;
 
 import java.util.List;
 
 public interface ExpenseManager {
-    void addExpense(double amount, String purpose);
+    ExpenseDto addExpense(ExpenseDto expenseDto);
     void deleteExpense(Long id);
-    void updateExpenseAmount(Long id, double amount);
-    void updateExpensePurpose(Long id, String purpose);
-    List<Expense> getAllExpenses();
+    ExpenseDto updateExpense(Long id,ExpenseDto expenseDto);
+    List<ExpenseDto> getAllExpenses();
+
+    ExpenseDto getExpenseById(Long id);
     double calculateTotalExpenses();
 }
