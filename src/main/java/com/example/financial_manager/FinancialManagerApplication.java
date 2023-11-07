@@ -57,6 +57,7 @@ public class FinancialManagerApplication {
 ////		double d = scanner.nextDouble();
 //
 //		//System.out.println("Income manager currency: "+incomeManager.getCurrency());
+
 	}
 
 }
