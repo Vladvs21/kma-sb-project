@@ -13,6 +13,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
@@ -46,5 +48,9 @@ public class AppConfiguration{
     @ConditionalOnProperty(name = "currency.default", havingValue = "EUR")
     public IncomeManager incomeManagerEUR(){
         return new IncomeManagerImpl(incomeMapper,incomeRepository,"EUR");
+    }
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 }

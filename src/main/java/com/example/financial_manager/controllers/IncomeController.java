@@ -1,5 +1,6 @@
 package com.example.financial_manager.controllers;
 
+import com.example.financial_manager.dto.ExpenseDto;
 import com.example.financial_manager.dto.IncomeDto;
 import com.example.financial_manager.managers.IncomeManager;
 import jakarta.validation.Valid;
@@ -8,7 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -17,6 +21,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class IncomeController {
     private final IncomeManager incomeService;
+
+    @GetMapping("/view")
+    public ModelAndView viewAllIncomes(Model model, ModelMap map) {
+        List<IncomeDto> incomes = incomeService.getAllIncomes();
+        model.addAttribute("incomes", incomes);
+        return new ModelAndView("incomes", map);
+    }
 
     @GetMapping
     public ResponseEntity<List<IncomeDto>> getAllIncomes() {

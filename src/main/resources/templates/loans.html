@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Loan List</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h1>Loan List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Purpose</th>
+        <th>Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="loan : ${loans}">
+        <td th:text="${loan.loan_id}"></td>
+        <td th:text="${loan.loanSource}"></td>
+        <td th:text="${loan.loanAmount}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

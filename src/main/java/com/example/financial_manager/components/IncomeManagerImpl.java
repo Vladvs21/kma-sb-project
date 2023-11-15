@@ -3,7 +3,6 @@ package com.example.financial_manager.components;
 import com.example.financial_manager.controllers.exceptionHandler.exceptions.NoSuchIncomeException;
 import com.example.financial_manager.dto.IncomeDto;
 import com.example.financial_manager.entities.ExpenseEntity;
-import com.example.financial_manager.entities.Expense;
 import com.example.financial_manager.managers.IncomeManager;
 import com.example.financial_manager.entities.IncomeEntity;
 import com.example.financial_manager.mappers.IncomeMapper;
