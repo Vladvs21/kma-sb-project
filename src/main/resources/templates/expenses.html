@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Expense List</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
@@ -22,15 +22,17 @@
     </tr>
     </tbody>
 
-    <form action="/expenses/createExpanse" method="post" th:object="${newExpense}">
-        <label for="purpose">Purpose:</label>
-        <input type="text" id="purpose" name="purpose" th:field="*{purpose}" required>
-        <br>
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount" th:field="*{amount}" required>
-        <br>
-        <button type="submit">Add Expense</button>
-    </form>
+
+
 </table>
+<form action="/expenses/createExpanse" method="post" th:object="${newExpense}">
+    <label for="purpose">Purpose:</label>
+    <input type="text" id="purpose" name="purpose" th:field="*{purpose}" required>
+    <br>
+    <label for="amount">Amount:</label>
+    <input type="text" id="amount" name="amount" th:field="*{amount}" required>
+    <br>
+    <button type="submit">Add Expense</button>
+</form>
 </body>
 </html>

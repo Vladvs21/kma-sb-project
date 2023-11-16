@@ -1,9 +1,6 @@
-<!-- src/main/resources/templates/incomes.html -->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Income List</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
@@ -24,6 +21,15 @@
         <td th:text="${income.amount}"></td>
     </tr>
     </tbody>
+    <form action="/incomes/createIncome" method="post" th:object="${newIncome}">
+        <label for="source">Source:</label>
+        <input type="text" id="source" name="source" th:field="*{source}" required>
+        <br>
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" th:field="*{amount}" required>
+        <br>
+        <button id="submit-button" type="submit">Add Income</button>
+    </form>
 </table>
 </body>
 </html>
