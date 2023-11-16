@@ -2,11 +2,14 @@ package com.example.financial_manager;
 
 import com.example.financial_manager.components.ExpenseManagerImpl;
 import com.example.financial_manager.components.IncomeManagerImpl;
+import com.example.financial_manager.components.LoanManagerImpl;
 import com.example.financial_manager.dto.IncomeDto;
+import com.example.financial_manager.dto.LoanDto;
 import com.example.financial_manager.managers.ExpenseManager;
 import com.example.financial_manager.managers.IncomeManager;
 //import com.example.financial_manager_starter.services.UserInfoService;
 //import com.example.financial_manager_starter.services.UserInfoServiceImpl;
+import com.example.financial_manager.managers.LoanManager;
 import com.example.financial_manager.models.Expanse;
 import com.example.financial_manager.dto.ExpenseDto;
 import org.springframework.boot.SpringApplication;
@@ -35,6 +38,13 @@ public class FinancialManagerApplication {
 		incomeDto.setSource("Salary");
 		incomeManager.addIncome(incomeDto);
 
+		LoanManagerImpl loanManager = context.getBean(LoanManagerImpl.class);
+
+		LoanDto loanDto = new LoanDto();
+		loanDto.setLoanAmount(100);
+		loanDto.setLoanSource("Monobank");
+		loanManager.addLoan(loanDto);
+
 		FinanceManager financeManager = context.getBean(FinanceManager.class);
 		System.out.println("Budget: " + financeManager.calculateBudget());
 
@@ -57,6 +67,7 @@ public class FinancialManagerApplication {
 ////		double d = scanner.nextDouble();
 //
 //		//System.out.println("Income manager currency: "+incomeManager.getCurrency());
+
 	}
 
 }

@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -29,10 +31,12 @@ public class IncomeManagerImpl implements IncomeManager {
     private static final Logger logger = LoggerFactory.getLogger(IncomeManagerImpl.class);
     private static final Marker DB_CONNECT_MARKER = MarkerFactory.getMarker("DB_CONNECT");
 
+
     @Override
     public IncomeDto addIncome(IncomeDto incomeDto) {
         IncomeEntity income = incomeMapper.incomeDtoToIncomeEntity(incomeDto);
         incomeRepository.save(income);
+
         logger.info(DB_CONNECT_MARKER,"Income added successful");
         return incomeMapper.incomeEntityToIncomeDto(income);
     }

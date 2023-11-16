@@ -6,8 +6,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -17,6 +21,14 @@ import java.util.List;
 public class ExpenseController {
 
     private final ExpenseManagerImpl expenseService;
+
+    @GetMapping("/view")
+    public ModelAndView viewAllExpenses(Model model, ModelMap map) {
+        List<ExpenseDto> expenses = expenseService.getAllExpenses();
+        model.addAttribute("expenses", expenses);
+        model.addAttribute("newExpense", new ExpenseDto());
+        return new ModelAndView("expenses", map);
+    }
 
     @GetMapping
     public ResponseEntity<List<ExpenseDto>> getAllExpenses() {
@@ -30,11 +42,23 @@ public class ExpenseController {
         return ResponseEntity.ok(expense);
     }
 
+
     @PostMapping("/createExpanse")
-    public ResponseEntity<ExpenseDto> createExpense(@Valid @RequestBody ExpenseDto expenseDto) {
+    public ResponseEntity<ExpenseDto> createExpense(@Valid ExpenseDto expenseDto) {
         ExpenseDto createdExpense = expenseService.addExpense(expenseDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdExpense);
     }
+     /*
+    @PostMapping(path = "/createExpanse", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public ModelAndView createExpense(@Valid @ModelAttribute ExpenseDto expenseDto, Model model, ModelMap map) {
+        ExpenseDto createdExpense = expenseService.addExpense(expenseDto);
+
+        List<ExpenseDto> updatedExpenses = expenseService.getAllExpenses();
+        model.addAttribute("expenses", updatedExpenses);
+        model.addAttribute("newExpense", new ExpenseDto());
+        return new ModelAndView("expenses", map);
+    }
+     */
 
     @PutMapping("/{id}")
     public ResponseEntity<ExpenseDto> updateExpense(@PathVariable Long id, @Valid @RequestBody ExpenseDto expenseDto) {
