@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,7 @@ public class IncomeController {
     public ModelAndView viewAllIncomes(Model model, ModelMap map) {
         List<IncomeDto> incomes = incomeService.getAllIncomes();
         model.addAttribute("incomes", incomes);
+        model.addAttribute("newIncome", new IncomeDto());
         return new ModelAndView("incomes", map);
     }
 
@@ -39,9 +42,10 @@ public class IncomeController {
         return ResponseEntity.ok(incomeService.getIncome(id));
     }
 
-    @PostMapping(value = "/createIncome", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<IncomeDto> createIncome(@Valid @RequestBody IncomeDto incomeDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(incomeService.addIncome(incomeDto));
+    @PostMapping(value = "/createIncome")
+    public ResponseEntity<IncomeDto> createIncome(@Valid IncomeDto incomeDto){
+        IncomeDto createdIncome = incomeService.addIncome(incomeDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdIncome);
     }
     @PutMapping("/{id}")
     public ResponseEntity<IncomeDto> updateIncome(@PathVariable Long id,@Valid @RequestBody IncomeDto incomeDto){
