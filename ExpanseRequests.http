@@ -11,7 +11,7 @@ Content-Type: application/json
 GET http://localhost:8080/expenses
 
 ### GET Request to Get Expanse with id = 2
-GET http://localhost:8080/expenses/2
+GET http://localhost:8080/expenses/5
 
 ### PUT Request to Update Expanse with id = 3
 PUT http://localhost:8080/expenses/3

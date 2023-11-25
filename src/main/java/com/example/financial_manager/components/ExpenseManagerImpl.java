@@ -12,13 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -30,6 +26,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
     private static final Logger logger = LoggerFactory.getLogger(FinanceManager.class);
     private static final Marker DB_CONNECT_MARKER = MarkerFactory.getMarker("DB_CONNECT");
     @Override
+    //@RateLimited(timeWindowMillis = 60000)
     public ExpenseDto addExpense(ExpenseDto expenseDto) {
         ExpenseEntity expenseEntity = expenseMapper.expenseDtoToExpanseEntity(expenseDto);
         expenseRepository.save(expenseEntity);
