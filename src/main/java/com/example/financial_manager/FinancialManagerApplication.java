@@ -14,8 +14,11 @@ import com.example.financial_manager.models.Expanse;
 import com.example.financial_manager.dto.ExpenseDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 @SpringBootApplication
+@EnableScheduling
 public class FinancialManagerApplication {
 	public static void main(String[] args) {
 		var context = SpringApplication.run(FinancialManagerApplication.class, args);
@@ -45,8 +48,8 @@ public class FinancialManagerApplication {
 		loanDto.setLoanSource("Monobank");
 		loanManager.addLoan(loanDto);
 
-		FinanceManager financeManager = context.getBean(FinanceManager.class);
-		System.out.println("Budget: " + financeManager.calculateBudget());
+		// FinanceManager financeManager = context.getBean(FinanceManager.class);
+		// System.out.println("Budget: " + financeManager.calculateBudget());
 
 
 //		IncomeManager incomeManager = springContext.getBean(IncomeManagerImpl.class);
