@@ -18,7 +18,6 @@ public class DailyBudgetMonitoring {
     @Scheduled(cron = "0 0 0 * * *") // every day at 00:00:00
     public void run() {
         FinanceManager financeManager = applicationContext.getBean(FinanceManager.class);
-
 		System.out.println("Budget: " + financeManager.calculateBudget()); // send info notification to client
     }
 
