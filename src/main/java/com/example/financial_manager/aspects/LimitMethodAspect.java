@@ -21,13 +21,12 @@ public class LimitMethodAspect {
     public Object limitAddingExpanses(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().toShortString();
 
-        if (counter <= LIMIT) {
+        if (counter < LIMIT) {
             counter++;
             return joinPoint.proceed();
         } else {
-            // Перевищено ліміт
             System.out.println("Call limit exceeded for method: " + methodName);
-            return null; // Можна викинути виняток або повернути інше значення за необхідності
+            return null;
         }
     }
 
