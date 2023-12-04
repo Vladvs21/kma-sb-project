@@ -15,7 +15,7 @@ public class CurrencyApiService {
 
     public CurrencyRates fetchCurrencyRates() {
         //String apiKey = "cur_live_ocdBOKquG87vqyE5wXTB7rtGM1mNIfBnP4dNz8nv";
-        String apiUrl = "https://api.currencyapi.com/v3/latest?apikey=cur_live_ocdBOKquG87vqyE5wXTB7rtGM1mNIfBnP4dNz8nv&currencies=EUR%2CUSD%2CCAD";
+        String apiUrl = "https://api.currencyapi.com/v3/latest?apikey=cur_live_ocdBOKquG87vqyE5wXTB7rtGM1mNIfBnP4dNz8nv&currencies=EUR";
         ResponseEntity<CurrencyRates> response = restTemplate.exchange(
                 apiUrl,
                 HttpMethod.GET,
