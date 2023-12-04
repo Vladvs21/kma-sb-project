@@ -12,6 +12,9 @@ import com.example.financial_manager.managers.IncomeManager;
 import com.example.financial_manager.managers.LoanManager;
 import com.example.financial_manager.models.Expanse;
 import com.example.financial_manager.dto.ExpenseDto;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -22,7 +25,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @EnableScheduling
 @EnableCaching
 public class FinancialManagerApplication {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		var context = SpringApplication.run(FinancialManagerApplication.class, args);
 		ExpenseManagerImpl expenseManager = context.getBean(ExpenseManagerImpl.class);
 
