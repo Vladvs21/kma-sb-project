@@ -21,15 +21,15 @@
         <td th:text="${income.amount}"></td>
     </tr>
     </tbody>
-    <form action="/incomes/createIncome" method="post" th:object="${newIncome}">
-        <label for="source">Source:</label>
-        <input type="text" id="source" name="source" th:field="*{source}" required>
-        <br>
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount" th:field="*{amount}" required>
-        <br>
-        <button id="submit-button" type="submit">Add Income</button>
-    </form>
 </table>
+<form th:action="@{/user/{id}/incomes/createIncome (id = ${newIncome.userId})}"  method="post" th:object="${newIncome}">
+    <label for="source">Source:</label>
+    <input type="text" id="source" name="source" th:field="*{source}" required>
+    <br>
+    <label for="amount">Amount:</label>
+    <input type="text" id="amount" name="amount" th:field="*{amount}" required>
+    <br>
+    <button id="submit-button" type="submit">Add Income</button>
+</form>
 </body>
 </html>

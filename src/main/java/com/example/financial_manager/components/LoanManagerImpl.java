@@ -50,8 +50,13 @@ public class LoanManagerImpl implements LoanManager {
 
 
     @Override
-    public List<LoanDto> getAllLoans() {
-        return repository.findAll().stream().map(mapper::loanEntityToLoanDto).toList();
+    public List<LoanDto> getAllLoans(Long userId) {
+        return repository.findAllByUserEntityId(userId).stream().map(mapper::loanEntityToLoanDto).toList();
+    }
+
+    @Override
+    public List<LoanEntity> getAllEntityLoans(Long userId) {
+        return repository.findAllByUserEntityId(userId);
     }
 
     @Override

@@ -10,4 +10,6 @@ import java.util.List;
 public interface IncomeRepository extends JpaRepository<IncomeEntity,Long> {
     List<IncomeEntity> findByIncomeAmount(double amount);
     List<IncomeEntity> findByIncomeSource(String source);
+
+    List<IncomeEntity> findAllByUserId(Long userId);
 }

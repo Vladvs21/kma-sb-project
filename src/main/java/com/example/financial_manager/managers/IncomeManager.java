@@ -9,7 +9,8 @@ public interface IncomeManager {
     IncomeDto addIncome(IncomeDto incomeDto);
     void deleteIncome(Long id);
     IncomeDto updateIncome(Long id, IncomeDto incomeDto);
-    List<IncomeDto> getAllIncomes();
+    List<IncomeDto> getAllIncomes(Long userId);
+    List<IncomeEntity> getAllEntityIncomes(Long userId);
     IncomeDto getIncome(Long id);
     double calculateTotalIncome();
 }

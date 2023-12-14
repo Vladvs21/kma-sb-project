@@ -65,8 +65,13 @@ public class IncomeManagerImpl implements IncomeManager {
 
 
     @Override
-    public List<IncomeDto> getAllIncomes() {
-        return incomeRepository.findAll().stream().map(incomeMapper::incomeEntityToIncomeDto).toList();
+    public List<IncomeDto> getAllIncomes(Long userId) {
+        return incomeRepository.findAllByUserId(userId).stream().map(incomeMapper::incomeEntityToIncomeDto).toList();
+    }
+
+    @Override
+    public List<IncomeEntity> getAllEntityIncomes(Long userId) {
+        return incomeRepository.findAllByUserId(userId);
     }
 
     @Override

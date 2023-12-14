@@ -9,7 +9,8 @@ public interface LoanManager {
     LoanDto addLoan(LoanDto loanDto);
     void deleteLoan(Long id);
     LoanDto updateLoan(Long id, LoanDto loanDto);
-    List<LoanDto> getAllLoans();
+    List<LoanDto> getAllLoans(Long userId);
+    List<LoanEntity> getAllEntityLoans(Long userId);
     LoanDto getLoan(Long id);
     double calculateTotalLoans();
 }

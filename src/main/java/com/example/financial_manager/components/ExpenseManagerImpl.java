@@ -65,8 +65,13 @@ public class ExpenseManagerImpl implements ExpenseManager {
 
 
     @Override
-    public List<ExpenseDto> getAllExpenses() {
-        return expenseRepository.findAll().stream().map(expenseMapper::expanseEntityToExpanseDto).toList();
+    public List<ExpenseDto> getAllExpenses(Long userId) {
+        return expenseRepository.findAllByUserId(userId).stream().map(expenseMapper::expanseEntityToExpanseDto).toList();
+    }
+
+    @Override
+    public List<ExpenseEntity> getAllEntityExpenses(Long userId) {
+        return expenseRepository.findAllByUserId(userId);
     }
 
     @Cacheable(cacheNames = "expense", cacheManager = "FinancialCacheManager")

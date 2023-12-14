@@ -16,5 +16,7 @@ public class LoanDto {
     @NotNull
     @Min(0)
     private double loanAmount;
+    @NotNull
+    Long userId;
 //    private AssetDto assetDto;
 }

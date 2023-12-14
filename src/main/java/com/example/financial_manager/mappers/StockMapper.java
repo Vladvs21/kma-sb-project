@@ -1,31 +1,34 @@
-package com.example.financial_manager.mappers.othermappers;
+package com.example.financial_manager.mappers;
 
 import com.example.financial_manager.dto.StockDto;
 import com.example.financial_manager.entities.StockEntity;
+import com.example.financial_manager.managers.UserManager;
+import com.example.financial_manager.mappers.othermappers.AssetMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 public class StockMapper {
-    private final AssetMapper assetMapper;
+    private final UserManager userManager;
     public StockEntity stockDtoToStockEntity(StockDto stockDto){
 
         return new StockEntity(
                 stockDto.getStock_id(),
                 stockDto.getNameOfCompany(),
                 stockDto.getPrice(),
-                stockDto.getAssetDtos().stream().map(assetMapper::assetDtoToAssetEntity).collect(Collectors.toSet())
+                userManager.getUserEntityById(stockDto.getUserId())
                 );
     }
 
-    public StockDto stockDtoToStockEntity(StockEntity stockEntity1){
+    public StockDto stockEntityToStockDto(StockEntity stockEntity1){
         return new StockDto(
                 stockEntity1.getStock_id(),
                 stockEntity1.getNameOfCompany(),
                 stockEntity1.getPrice(),
-                stockEntity1.getAssetEntities().stream().map(assetMapper::assetEntityToAssetDto).collect(Collectors.toSet())
+                stockEntity1.getUserEntity().getId()
         );
     }
 }

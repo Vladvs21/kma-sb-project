@@ -18,4 +18,6 @@ public class IncomeDto {
     @NotNull
     @Min(1)
     double amount;
+    @NotNull
+    Long userId;
 }

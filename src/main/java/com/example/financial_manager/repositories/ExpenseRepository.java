@@ -10,4 +10,6 @@ import java.util.List;
 public interface ExpenseRepository extends JpaRepository<ExpenseEntity,Long> {
     List<ExpenseEntity> findByExpanseAmount(double amount);
     List<ExpenseEntity> findByExpensePurpose(String purpose);
+
+    List<ExpenseEntity> findAllByUserId(Long userId);
 }

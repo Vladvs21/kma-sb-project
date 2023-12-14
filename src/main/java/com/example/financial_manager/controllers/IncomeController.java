@@ -19,41 +19,45 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-@RequestMapping("/incomes")
+@RequestMapping("user/{userId}/incomes")
 @RequiredArgsConstructor
 public class IncomeController {
     private final IncomeManager incomeService;
 
     @GetMapping("/view")
-    public ModelAndView viewAllIncomes(Model model, ModelMap map) {
-        List<IncomeDto> incomes = incomeService.getAllIncomes();
+    public ModelAndView viewAllIncomes(Model model, ModelMap map, @PathVariable Long userId) {
+        IncomeDto incomeDto = new IncomeDto();
+        incomeDto.setUserId(userId);
+        List<IncomeDto> incomes = incomeService.getAllIncomes(userId);
         model.addAttribute("incomes", incomes);
-        model.addAttribute("newIncome", new IncomeDto());
+        model.addAttribute("newIncome", incomeDto);
         return new ModelAndView("incomes", map);
     }
 
     @GetMapping
-    public ResponseEntity<List<IncomeDto>> getAllIncomes() {
-        return ResponseEntity.ok(incomeService.getAllIncomes());
+    public ResponseEntity<List<IncomeDto>> getAllIncomes(@PathVariable Long userId) {
+        return ResponseEntity.ok(incomeService.getAllIncomes(userId));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<IncomeDto> getIncome(@PathVariable Long id) {
+    public ResponseEntity<IncomeDto> getIncome(@PathVariable Long id, @PathVariable Long userId) {
         return ResponseEntity.ok(incomeService.getIncome(id));
     }
 
     @PostMapping(value = "/createIncome")
-    public ResponseEntity<IncomeDto> createIncome(@Valid IncomeDto incomeDto){
-        IncomeDto createdIncome = incomeService.addIncome(incomeDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdIncome);
+    public ModelAndView createIncome(@Valid IncomeDto incomeDto, @PathVariable Long userId){
+        incomeDto.setUserId(userId);
+        incomeService.addIncome(incomeDto);
+        return new ModelAndView("redirect:/user/{userId}/incomes/view");
     }
     @PutMapping("/{id}")
-    public ResponseEntity<IncomeDto> updateIncome(@PathVariable Long id,@Valid @RequestBody IncomeDto incomeDto){
+    public ResponseEntity<IncomeDto> updateIncome(@PathVariable Long id, @Valid @RequestBody IncomeDto incomeDto, @PathVariable Long userId){
+        incomeDto.setUserId(userId);
         return ResponseEntity.ok(incomeService.updateIncome(id,incomeDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteIncome(@PathVariable Long id){
+    public ResponseEntity<Void> deleteIncome(@PathVariable Long id, @PathVariable Long userId){
         incomeService.deleteIncome(id);
         return ResponseEntity.noContent().build();
     }

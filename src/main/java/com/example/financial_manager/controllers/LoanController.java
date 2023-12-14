@@ -15,39 +15,43 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
-@RequestMapping("/loans")
+@RequestMapping("user/{userId}/loans")
 @RequiredArgsConstructor
 public class LoanController {
     private final LoanManager loanService;
 
     @GetMapping("/view")
-    public ModelAndView viewAllLoans(Model model, ModelMap map) {
-        List<LoanDto> loans = loanService.getAllLoans();
+    public ModelAndView viewAllLoans(Model model, ModelMap map, @PathVariable Long userId) {
+        List<LoanDto> loans = loanService.getAllLoans(userId);
+        LoanDto loanDto = new LoanDto();
+        loanDto.setUserId(userId);
         model.addAttribute("loans", loans);
+        model.addAttribute("newLoan", loanDto);
         return new ModelAndView("loans", map);
     }
 
     @GetMapping
-    public ResponseEntity<List<LoanDto>> getAllLoans() {
-        return ResponseEntity.ok(loanService.getAllLoans());
+    public ResponseEntity<List<LoanDto>> getAllLoans(@PathVariable Long userId) {
+        return ResponseEntity.ok(loanService.getAllLoans(userId));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LoanDto> getLoan(@PathVariable Long id) {
+    public ResponseEntity<LoanDto> getLoan(@PathVariable Long id, @PathVariable Long userId) {
         return ResponseEntity.ok(loanService.getLoan(id));
     }
 
     @PostMapping("/createLoan")
-    public ResponseEntity<LoanDto> createLoan(@Valid @RequestBody LoanDto incomeDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(loanService.addLoan(incomeDto));
+    public ModelAndView createLoan(@Valid LoanDto incomeDto, @PathVariable Long userId){
+        loanService.addLoan(incomeDto);
+        return new ModelAndView("redirect:/user/{userId}/loans/view");
     }
     @PutMapping("/{id}")
-    public ResponseEntity<LoanDto> updateLoan(@PathVariable Long id,@Valid @RequestBody LoanDto incomeDto){
+    public ResponseEntity<LoanDto> updateLoan(@PathVariable Long id,@Valid LoanDto incomeDto, @PathVariable Long userId){
         return ResponseEntity.ok(loanService.updateLoan(id,incomeDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLoan(@PathVariable Long id){
+    public ResponseEntity<Void> deleteLoan(@PathVariable Long id, @PathVariable Long userId){
         loanService.deleteLoan(id);
         return ResponseEntity.noContent().build();
     }

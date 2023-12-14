@@ -21,11 +21,8 @@
         <td th:text="${expense.amount}"></td>
     </tr>
     </tbody>
-
-
-
 </table>
-<form action="/expenses/createExpanse" method="post" th:object="${newExpense}">
+<form th:action="@{/user/{id}/expenses/createExpense (id = ${newExpense.userId})}" method="post" th:object="${newExpense}">
     <label for="purpose">Purpose:</label>
     <input type="text" id="purpose" name="purpose" th:field="*{purpose}" required>
     <br>

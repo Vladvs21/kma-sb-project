@@ -7,22 +7,22 @@ import lombok.RequiredArgsConstructor;
 //@Component
 @RequiredArgsConstructor
 public class InvestmentMapper {
-    private final AssetMapper assetMapper;
-    public InvestmentDto investmentEntityToInvestmentDto(InvestmentEntity investmentEntity){
-        return new InvestmentDto(
-                investmentEntity.getInvestment_id(),
-                investmentEntity.getInvestmentName(),
-                investmentEntity.getInvestmentPrice(),
-               assetMapper.assetEntityToAssetDto(investmentEntity.getAssetEntity())
-        );
-    }
-
-    public InvestmentEntity investmentDtoToInvestmentEntity(InvestmentDto investmentDto){
-        return new InvestmentEntity(
-                investmentDto.getInvestment_id(),
-                investmentDto.getInvestmentName(),
-                investmentDto.getInvestmentPrice(),
-                assetMapper.assetDtoToAssetEntity(investmentDto.getAssetDto())
-        );
-    }
+//    private final AssetMapper assetMapper;
+//    public InvestmentDto investmentEntityToInvestmentDto(InvestmentEntity investmentEntity){
+//        return new InvestmentDto(
+//                investmentEntity.getInvestment_id(),
+//                investmentEntity.getInvestmentName(),
+//                investmentEntity.getInvestmentPrice(),
+//               assetMapper.assetEntityToAssetDto(investmentEntity.getAssetEntity())
+//        );
+//    }
+//
+//    public InvestmentEntity investmentDtoToInvestmentEntity(InvestmentDto investmentDto){
+//        return new InvestmentEntity(
+//                investmentDto.getInvestment_id(),
+//                investmentDto.getInvestmentName(),
+//                investmentDto.getInvestmentPrice(),
+//                assetMapper.assetDtoToAssetEntity(investmentDto.getAssetDto())
+//        );
+//    }
 }

@@ -23,5 +23,14 @@
     </tr>
     </tbody>
 </table>
+<form th:action="@{/user/{id}/loans/createLoan (id = ${newLoan.userId})}"  method="post" th:object="${newLoan}">
+    <label for="source">Source:</label>
+    <input type="text" id="source" name="source" th:field="*{loanSource}" required>
+    <br>
+    <label for="amount">Amount:</label>
+    <input type="text" id="amount" name="amount" th:field="*{loanAmount}" required>
+    <br>
+    <button id="submit-button" type="submit">Add Income</button>
+</form>
 </body>
 </html>

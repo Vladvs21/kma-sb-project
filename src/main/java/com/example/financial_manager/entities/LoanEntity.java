@@ -22,6 +22,11 @@ public class LoanEntity {
     @Column(nullable = false)
     private double loanAmount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UserEntity userEntity;
+
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "asset_id", nullable = false)
 //    @OnDelete(action = OnDeleteAction.NO_ACTION)

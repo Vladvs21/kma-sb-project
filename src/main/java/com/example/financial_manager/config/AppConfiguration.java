@@ -13,7 +13,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
-@EnableScheduling
+//@EnableScheduling
 @PropertySource("classpath:application.properties")
 @RequiredArgsConstructor
 public class AppConfiguration{

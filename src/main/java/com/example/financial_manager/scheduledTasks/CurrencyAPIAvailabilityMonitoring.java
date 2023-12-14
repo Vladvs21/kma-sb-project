@@ -12,7 +12,7 @@ public class CurrencyAPIAvailabilityMonitoring {
     
     private static final Logger logger = LoggerFactory.getLogger(CurrencyAPIAvailabilityMonitoring.class);
 
-    @Scheduled(fixedDelay = 60*1000) // minute after prev run finished
+    @Scheduled(fixedDelay = 120*1000) // minute after prev run finished
     public void run() {
         CurrencyApiService apiService = new CurrencyApiService();
         try {

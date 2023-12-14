@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Set;
 
@@ -20,6 +22,9 @@ public class StockEntity {
     private String nameOfCompany;
     @Column(nullable = false)
     private double price;
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<AssetEntity> assetEntities;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UserEntity userEntity;
 }

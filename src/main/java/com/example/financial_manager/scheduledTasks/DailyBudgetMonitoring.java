@@ -17,16 +17,16 @@ import org.springframework.stereotype.Component;
 import com.example.financial_manager.FinanceManager;
 import com.example.financial_manager.FinancialManagerApplication;
 
-@Component
-@AllArgsConstructor
+//@Component
+//@AllArgsConstructor
 public class DailyBudgetMonitoring {
 
-    private final ApplicationContext applicationContext;
-    @Scheduled(cron = "0 0 0 * * *") // every day at 00:00:00
-    public void run() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
-        JobLauncher jobLauncher = applicationContext.getBean(JobLauncher.class);
-        Job job = applicationContext.getBean(Job.class);
-        jobLauncher.run(job, new JobParameters());
+//    private final ApplicationContext applicationContext;
+//    private final JobLauncher jobLauncher;
+    //@Scheduled(fixedDelay = 10000) // every day at 00:00:00
+    public void run() throws Exception {
+//        var jobStart = applicationContext.getBean("first job", Job.class);
+//        jobLauncher.run(jobStart, new JobParameters());
     }
 
 }

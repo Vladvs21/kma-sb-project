@@ -9,4 +9,6 @@ import java.util.List;
 public interface LoanRepository extends JpaRepository<LoanEntity,Long> {
     List<LoanEntity> findByLoanSource(String source);
     List<LoanEntity> findByLoanAmount(double amount);
+
+    List<LoanEntity> findAllByUserEntityId(Long userId);
 }
