@@ -18,9 +18,7 @@ class FinancialManagerApplicationTests {
 	@Test
 	void contextLoads() {
 		ExpenseManager expenseManager = applicationContext.getBean(ExpenseManager.class);
-
 		assertNotNull(expenseManager);
-
 	}
 
 }

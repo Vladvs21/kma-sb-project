@@ -2,6 +2,7 @@ package com.example.financial_manager.mappers.othermappers;
 
 import com.example.financial_manager.dto.InvestmentDto;
 import com.example.financial_manager.entities.InvestmentEntity;
+import com.example.financial_manager.mappers.othermappers.AssetMapper;
 import lombok.RequiredArgsConstructor;
 
 //@Component

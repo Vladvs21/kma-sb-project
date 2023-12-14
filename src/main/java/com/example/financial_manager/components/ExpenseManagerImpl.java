@@ -72,9 +72,9 @@ public class ExpenseManagerImpl implements ExpenseManager {
     @Cacheable(cacheNames = "expense", cacheManager = "FinancialCacheManager")
     @Override
     public ExpenseDto getExpenseById(Long id) {
-        if(expenseRepository.findById(id).isPresent()){
+        if(expenseRepository.findById(id).isPresent())
             return expenseMapper.expanseEntityToExpanseDto(expenseRepository.findById(id).get());
-        }else{
+        else{
             throw new NoSuchExpanseException(id);
         }
 

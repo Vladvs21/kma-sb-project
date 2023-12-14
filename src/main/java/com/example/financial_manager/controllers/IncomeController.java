@@ -43,7 +43,7 @@ public class IncomeController {
     }
 
     @PostMapping(value = "/createIncome")
-    public ResponseEntity<IncomeDto> createIncome(@Valid IncomeDto incomeDto){
+    public ResponseEntity<IncomeDto> createIncome(@RequestBody IncomeDto incomeDto){
         IncomeDto createdIncome = incomeService.addIncome(incomeDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdIncome);
     }
