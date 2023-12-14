@@ -2,6 +2,7 @@ package com.example.financial_manager.mappers.othermappers;
 
 import com.example.financial_manager.dto.StockDto;
 import com.example.financial_manager.entities.StockEntity;
+import com.example.financial_manager.mappers.othermappers.AssetMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.util.stream.Collectors;

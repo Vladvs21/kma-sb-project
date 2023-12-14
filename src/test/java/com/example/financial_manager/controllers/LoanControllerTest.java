@@ -1,9 +1,6 @@
-package com.example.financial_manager;
+package com.example.financial_manager.controllers;
 
 import com.example.financial_manager.components.LoanManagerImpl;
-import com.example.financial_manager.components.LoanManagerImpl;
-import com.example.financial_manager.controllers.LoanController;
-import com.example.financial_manager.controllers.LoanController;
 import com.example.financial_manager.dto.LoanDto;
 import com.example.financial_manager.securityConfig.SecurityConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
