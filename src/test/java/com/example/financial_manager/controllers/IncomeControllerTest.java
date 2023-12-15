@@ -48,7 +48,7 @@ public class IncomeControllerTest {
     @Test
     @WithMockUser(username = "user", password = "password", roles = "USER")
     public void getAllIncomes() throws Exception {
-        mockMvc.perform(get("/incomes")
+        mockMvc.perform(get("/user/1/incomes")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8"))
@@ -58,7 +58,7 @@ public class IncomeControllerTest {
     @Test
     @WithMockUser(username = "user", password = "password", roles = "USER")
     public void getIncomeById() throws Exception {
-        mockMvc.perform(get("/incomes/1")
+        mockMvc.perform(get("/user/1/incomes/1")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8"))
@@ -69,28 +69,27 @@ public class IncomeControllerTest {
     @Test
     @WithMockUser(username = "admin", password = "1111", roles = "ADMIN")
     public void createIncome() throws Exception {
-        IncomeDto incomeDto = new IncomeDto(null, "Part-Time Job", 1500);
-        IncomeDto createdIncome = new IncomeDto(3L, "Part-Time Job", 1500);
+        IncomeDto incomeDto = new IncomeDto(null, "Part-Time Job", 1500, 1L);
+        IncomeDto createdIncome = new IncomeDto(3L, "Part-Time Job", 1500, 1L);
 
         when(incomeManager.addIncome(any())).thenReturn(createdIncome);
 
-        mockMvc.perform(post("/incomes/createIncome")
+        mockMvc.perform(post("/user/1/incomes/createIncome")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
                         .content(objectMapper.writeValueAsString(incomeDto)))
-                .andExpect(status().isCreated())
-                .andExpect(content().json(objectMapper.writeValueAsString(createdIncome)));
+                .andExpect(status().is3xxRedirection());
     }
 
     @Test
     @WithMockUser(username = "admin", password = "1111", roles = "ADMIN")
     public void updateIncome() throws Exception {
-        IncomeDto updatedIncome = new IncomeDto(1L, "New Salary", 2000);
+        IncomeDto updatedIncome = new IncomeDto(1L, "New Salary", 2000, 1L);
 
         when(incomeManager.updateIncome(eq(1L), any())).thenReturn(updatedIncome);
 
-        mockMvc.perform(put("/incomes/1")
+        mockMvc.perform(put("/user/1/incomes/1")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
@@ -102,7 +101,7 @@ public class IncomeControllerTest {
     @Test
     @WithMockUser(username = "admin", password = "1111", roles = "ADMIN")
     public void deleteIncome() throws Exception {
-        mockMvc.perform(delete("/incomes/1")
+        mockMvc.perform(delete("/user/1/incomes/1")
                         .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8"))

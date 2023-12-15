@@ -12,5 +12,5 @@ public interface IncomeManager {
     List<IncomeDto> getAllIncomes(Long userId);
     List<IncomeEntity> getAllEntityIncomes(Long userId);
     IncomeDto getIncome(Long id);
-    double calculateTotalIncome();
+    double calculateTotalIncome(Long id);
 }

@@ -31,5 +31,8 @@
     <br>
     <button type="submit">Add Expense</button>
 </form>
+<form th:action="@{/user/{id}/view (id = ${newExpense.userId})}" method="get">
+    <button>HOME</button>
+</form>
 </body>
 </html>

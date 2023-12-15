@@ -14,7 +14,7 @@ public class TestConfig {
     public RestTemplateBuilder restTemplateBuilder() {
 
         return new RestTemplateBuilder()
-                .basicAuthentication("user", "password")
+                .basicAuthentication("admin", "1111")
                 .setConnectTimeout(Duration.ofSeconds(5));
     }
 }

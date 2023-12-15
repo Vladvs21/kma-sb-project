@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h1>Finance Manager</h1>
+<form th:action="@{/user/{id}/expenses/view (id = ${user.id})}" method="get">
+    <button>Expenses</button>
+    <h3 th:text="${expensesSum}"></h3>
+</form>
+<form th:action="@{/user/{id}/incomes/view (id = ${user.id})}" method="get">
+    <button>Incomes</button>
+    <h3 th:text="${incomesSum}"></h3>
+</form>
+
+<form th:action="@{/user/{id}/loans/view (id = ${user.id})}" method="get">
+    <button>Loans</button>
+    <h3 th:text="${loansSum}"></h3>
+</form>
+<h2 style="text-align: center;">Balance: </h2>
+<h2 style="text-align: center;" th:text="${budget}"></h2>
+</body>
+</html>

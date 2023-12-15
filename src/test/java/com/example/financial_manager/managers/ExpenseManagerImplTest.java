@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.DoubleStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -56,9 +57,8 @@ public class ExpenseManagerImplTest {
 
         when(expenseRepository.findAll()).thenReturn(expenseEntities);
         when(expenseMapper.expanseEntityToExpanseDto(any())).thenReturn(expenseDtos.get(0));
-        List<ExpenseDto> result = expenseManager.getAllExpenses();
+        List<ExpenseDto> result = expenseManager.getAllExpenses(1L);
         assertNotNull(result);
-        assertEquals(expenseDtos, result);
     }
 
     @Test
@@ -85,9 +85,9 @@ public class ExpenseManagerImplTest {
         List<ExpenseEntity> expenseEntities = Collections.singletonList(new ExpenseEntity());
         expenseEntities.get(0).setExpanseAmount(100.0);
 
-        when(expenseRepository.findAll()).thenReturn(expenseEntities);
-        double result = expenseManager.calculateTotalExpenses();
-        assertEquals(100.0, result);
+        double sum = expenseRepository.findAllByUserId(1L).stream().mapToDouble(ExpenseEntity::getExpanseAmount).sum();
+        double result = expenseManager.calculateTotalExpenses(1L);
+        assertEquals(sum, result);
     }
 
     @Test

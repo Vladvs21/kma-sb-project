@@ -32,5 +32,8 @@
     <br>
     <button id="submit-button" type="submit">Add Income</button>
 </form>
+<form th:action="@{/user/{id}/view (id = ${newLoan.userId})}" method="get">
+    <button>HOME</button>
+</form>
 </body>
 </html>

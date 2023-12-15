@@ -13,5 +13,5 @@ public interface ExpenseManager {
     List<ExpenseEntity> getAllEntityExpenses(Long userId);
 
     ExpenseDto getExpenseById(Long id);
-    double calculateTotalExpenses();
+    double calculateTotalExpenses(Long id);
 }

@@ -71,7 +71,7 @@ public class LoanManagerImpl implements LoanManager {
 
 
     @Override
-    public double calculateTotalLoans() {
-        return repository.findAll().stream().mapToDouble(LoanEntity::getLoanAmount).sum();
+    public double calculateTotalLoans(Long id) {
+        return repository.findAllByUserEntityId(id).stream().mapToDouble(LoanEntity::getLoanAmount).sum();
     }
 }

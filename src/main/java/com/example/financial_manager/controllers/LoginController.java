@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 @RestController
 @RequiredArgsConstructor
 public class LoginController {
@@ -14,15 +16,15 @@ public class LoginController {
     private final AuthenticationManager authenticationManager;
 
    @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody LoginRequest loginRequest) {
+    public ModelAndView login(@RequestBody LoginRequest loginRequest) {
         Authentication authenticationRequest =
                 UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.username(), loginRequest.password());
         Authentication authenticationResponse =
                 this.authenticationManager.authenticate(authenticationRequest);
         if(authenticationResponse.isAuthenticated()){
-            return (ResponseEntity<Void>) ResponseEntity.ok();
+            return new ModelAndView("redirect:/user/{userId}/expenses/view");
         }else{
-            return (ResponseEntity<Void>) ResponseEntity.badRequest();
+            return new ModelAndView("redirect:/login");
         }
 
     }

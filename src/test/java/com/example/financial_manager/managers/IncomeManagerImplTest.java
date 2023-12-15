@@ -56,7 +56,7 @@ public class IncomeManagerImplTest {
 
         when(incomeRepository.findAll()).thenReturn(incomeEntities);
         when(incomeMapper.incomeEntityToIncomeDto(any())).thenReturn(incomeDtos.get(0));
-        List<IncomeDto> result = incomeManager.getAllIncomes();
+        List<IncomeDto> result = incomeManager.getAllIncomes(1L);
         assertNotNull(result);
         assertEquals(incomeDtos, result);
     }
@@ -86,7 +86,7 @@ public class IncomeManagerImplTest {
         incomeEntities.get(0).setIncomeAmount(100.0);
 
         when(incomeRepository.findAll()).thenReturn(incomeEntities);
-        double result = incomeManager.calculateTotalIncome();
+        double result = incomeManager.calculateTotalIncome(1L);
         assertEquals(100.0, result);
     }
 

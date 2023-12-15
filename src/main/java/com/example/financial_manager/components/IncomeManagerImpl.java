@@ -84,9 +84,9 @@ public class IncomeManagerImpl implements IncomeManager {
     }
 
     @Override
-    public double calculateTotalIncome() {
+    public double calculateTotalIncome(Long id) {
         //System.out.println(currency);
-        return incomeRepository.findAll().stream().mapToDouble(IncomeEntity::getIncomeAmount).sum();
+        return incomeRepository.findAllByUserId(id).stream().mapToDouble(IncomeEntity::getIncomeAmount).sum();
     }
 
 }

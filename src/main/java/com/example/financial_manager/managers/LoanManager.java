@@ -12,5 +12,5 @@ public interface LoanManager {
     List<LoanDto> getAllLoans(Long userId);
     List<LoanEntity> getAllEntityLoans(Long userId);
     LoanDto getLoan(Long id);
-    double calculateTotalLoans();
+    double calculateTotalLoans(Long id);
 }

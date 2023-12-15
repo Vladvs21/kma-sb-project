@@ -86,7 +86,7 @@ public class ExpenseManagerImpl implements ExpenseManager {
     }
 
     @Override
-    public double calculateTotalExpenses() {
-       return expenseRepository.findAll().stream().mapToDouble(ExpenseEntity::getExpanseAmount).sum();
+    public double calculateTotalExpenses(Long id) {
+       return expenseRepository.findAllByUserId(id).stream().mapToDouble(ExpenseEntity::getExpanseAmount).sum();
     }
 }

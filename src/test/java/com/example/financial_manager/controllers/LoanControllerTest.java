@@ -50,7 +50,7 @@ public class LoanControllerTest {
     @Test
     @WithMockUser(username = "user", password = "password", roles = "USER")
     public void getAllLoans() throws Exception {
-        mockMvc.perform(get("/loans")
+        mockMvc.perform(get("/user/1/loans")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8"))
@@ -60,7 +60,7 @@ public class LoanControllerTest {
     @Test
     @WithMockUser(username = "user", password = "password", roles = "USER")
     public void getLoanById() throws Exception {
-        mockMvc.perform(get("/loans/1")
+        mockMvc.perform(get("/user/1/loans/1")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8"))
@@ -71,40 +71,38 @@ public class LoanControllerTest {
     @Test
     @WithMockUser(username = "admin", password = "1111", roles = "ADMIN")
     public void createLoan() throws Exception {
-        LoanDto loanDto = new LoanDto(null, "Derek", 100);
-        LoanDto createdLoan = new LoanDto(3L, "Part-Time Job", 100);
+        LoanDto loanDto = new LoanDto(null, "Derek", 100, 1L);
+        LoanDto createdLoan = new LoanDto(3L, "Part-Time Job", 100, 1L);
 
         when(loanManager.addLoan(any())).thenReturn(createdLoan);
 
-        mockMvc.perform(post("/loans/createLoan")
+        mockMvc.perform(post("/user/1/loans/createLoan")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
                         .content(objectMapper.writeValueAsString(loanDto)))
-                .andExpect(status().isCreated())
-                .andExpect(content().json(objectMapper.writeValueAsString(createdLoan)));
+                .andExpect(status().is3xxRedirection());
     }
 
     @Test
     @WithMockUser(username = "admin", password = "1111", roles = "ADMIN")
     public void updateLoan() throws Exception {
-        LoanDto updatedLoan = new LoanDto(1L, "Monobank", 100);
+        LoanDto updatedLoan = new LoanDto(1L, "Monobank", 100, 1L);
 
         when(loanManager.updateLoan(eq(1L), any())).thenReturn(updatedLoan);
 
-        mockMvc.perform(put("/loans/1")
+        mockMvc.perform(put("/user/1/loans/1")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
                         .content(objectMapper.writeValueAsString(updatedLoan)))
-                .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(updatedLoan)));
+                .andExpect(status().is3xxRedirection());
     }
 
     @Test
     @WithMockUser(username = "admin", password = "1111", roles = "ADMIN")
     public void deleteLoan() throws Exception {
-        mockMvc.perform(delete("/loans/1")
+        mockMvc.perform(delete("/user/1/loans/1")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8"))

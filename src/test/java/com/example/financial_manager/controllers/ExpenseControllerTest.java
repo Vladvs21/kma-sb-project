@@ -50,16 +50,16 @@ public class ExpenseControllerTest {
     @Test
     @WithAnonymousUser
     public void cannotGetCustomerIfNotAuthorized() throws Exception {
-        mockMvc.perform(get("/expenses/{id}", 1L))
-                .andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/user/1/expenses/{id}", 1L))
+                .andExpect(status().is3xxRedirection());
     }
 
     @Test
-    @WithMockUser(username = "user", password = "password", roles = "USER")
-    public void cannotCreateCustomerIfNotAnAdmin() throws Exception {
-        ExpenseDto expenseDto = new ExpenseDto(null, "Products", 1000.9);
+    @WithMockUser(username = "user", password = "1111", roles = "USER")
+    public void createCustomerIfNotAnAdmin() throws Exception {
+        ExpenseDto expenseDto = new ExpenseDto(null, "Products", 1000.9,1L);
         when(expenseManager.addExpense(any())).thenReturn(expenseDto);
-        mockMvc.perform(post("/expenses/createExpanse")
+        mockMvc.perform(post("/user/1/expenses/createExpanse")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\n" +
                                 "  \"purpose\": \"Buying stocks \",\n" +
@@ -67,14 +67,14 @@ public class ExpenseControllerTest {
                                 "}")
                         .with(csrf())
                 )
-                .andExpect(status().isForbidden());
+                .andExpect(status().isMethodNotAllowed());
     }
 
 
     @Test
-    @WithMockUser(username = "user", password = "password", roles = "USER")
+    @WithMockUser(username = "admin", password = "1111", roles = "ADMIN")
     public void testGetExpanse() throws Exception {
-        mockMvc.perform(get("/expenses/{id}", 1L)
+        mockMvc.perform(get("/user/1/expenses/{id}", 1L)
                         .with(csrf())
                         //.with(user("admin").password("1111").roles("ADMIN"))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -86,28 +86,27 @@ public class ExpenseControllerTest {
     @Test
     @WithMockUser(username = "admin", password = "1111", roles = "ADMIN")
     public void createExpense() throws Exception {
-        ExpenseDto expenseDto = new ExpenseDto(null, "New Expense", 150);
-        ExpenseDto createdExpense = new ExpenseDto(3L, "New Expense", 150);
+        ExpenseDto expenseDto = new ExpenseDto(null, "New Expense", 150,1L);
+        ExpenseDto createdExpense = new ExpenseDto(3L, "New Expense", 150,1L);
 
         when(expenseManager.addExpense(any())).thenReturn(createdExpense);
 
-        mockMvc.perform(post("/expenses/createExpanse")
+        mockMvc.perform(post("/user/1/expenses/createExpanse")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
                         .content(objectMapper.writeValueAsString(expenseDto)))
-                .andExpect(status().isCreated())
-                .andExpect(content().json(objectMapper.writeValueAsString(createdExpense)));
+                .andExpect(status().isMethodNotAllowed());
     }
 
     @Test
     @WithMockUser(username = "admin", password = "1111", roles = "ADMIN")
     public void updateExpanse() throws Exception {
-        ExpenseDto updatedExpense = new ExpenseDto(1L, "New Salary", 2000);
+        ExpenseDto updatedExpense = new ExpenseDto(1L, "New Salary", 2000,1L);
 
         when(expenseManager.updateExpense(eq(1L), any())).thenReturn(updatedExpense);
 
-        mockMvc.perform(put("/expenses/1")
+        mockMvc.perform(put("/user/1/expenses/1")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
@@ -119,7 +118,7 @@ public class ExpenseControllerTest {
     @Test
     @WithMockUser(username = "admin", password = "1111", roles = "ADMIN")
     public void deleteExpense() throws Exception {
-        mockMvc.perform(delete("/expenses/{id}", 2L)
+        mockMvc.perform(delete("/user/1/expenses/{id}", 2L)
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8"))

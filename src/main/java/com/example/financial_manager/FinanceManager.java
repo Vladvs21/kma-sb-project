@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class FinanceManager {
-    private final CurrencyApiService apiService;
     private final ExpenseManager expenseManager;
     private final IncomeManager incomeManager;
     private static final Logger logger = LoggerFactory.getLogger(FinanceManager.class);
@@ -25,14 +24,12 @@ public class FinanceManager {
     @Value("${currency.default}")
     private String currency;
 
-    public double calculateBudget() {
+    public double calculateBudget(Long userId) {
         MDC.put("currency", currency);
-        double totalExpenses = expenseManager.calculateTotalExpenses();
-        double totalIncome = incomeManager.calculateTotalIncome();
+        double totalExpenses = expenseManager.calculateTotalExpenses(userId);
+        double totalIncome = incomeManager.calculateTotalIncome(userId);
         logger.info("Calculating budget for currency: {}", currency);
         MDC.remove("currency");
-        //System.out.println(apiService.fetchCurrencyRates().getRates());
-        //System.out.println("FinanceManager currency: " + currency);
         return totalIncome - totalExpenses;
     }
 }

@@ -56,7 +56,7 @@ public class LoanManagerImplTest {
 
         when(loanRepository.findAll()).thenReturn(loanEntities);
         when(loanMapper.loanEntityToLoanDto(any())).thenReturn(loanDtos.get(0));
-        List<LoanDto> result = loanManager.getAllLoans();
+        List<LoanDto> result = loanManager.getAllLoans(1L);
         assertNotNull(result);
         assertEquals(loanDtos, result);
     }
@@ -86,7 +86,7 @@ public class LoanManagerImplTest {
         loanEntities.get(0).setLoanAmount(100.0);
 
         when(loanRepository.findAll()).thenReturn(loanEntities);
-        double result = loanManager.calculateTotalLoans();
+        double result = loanManager.calculateTotalLoans(1L);
         assertEquals(100.0, result);
     }
 
